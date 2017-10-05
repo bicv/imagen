@@ -39,7 +39,7 @@ for package_list in packages_to_state:
 
 setup_args.update(dict(
     name='imagen',
-    version="2.0.1",
+    version="2.1.0",
     description='Generic Python library for 0D, 1D, and 2D pattern distributions.',
     long_description=open('README.rst').read() if os.path.isfile('README.rst') else 'Consult README.rst',
     author= "IOAM",
@@ -81,18 +81,8 @@ def check_pseudo_package(path):
 
 
 if __name__=="__main__":
-
-    if 'IMAGEN_RELEASE' in os.environ:
-        # Make sure to create these directories and populate them before upload
-        setup_args['packages'] += ["imagen.tests", "imagen.notebooks", "imagen.notebooks.images"]
-        setup_args['package_data']['imagen.notebooks'] = ['*.ipynb']
-        setup_args['package_data']['imagen.notebooks.images'] = ['*.pgm']
-
-        if ('upload' in sys.argv) or ('sdist' in sys.argv):
-            check_pseudo_package(os.path.join('.', 'imagen', 'tests'))
-            check_pseudo_package(os.path.join('.', 'imagen', 'notebooks'))
-
-            import imagen
-            imagen.__version__.verify(setup_args['version'])
+    if ('upload' in sys.argv) or ('sdist' in sys.argv):
+        import imagen
+        imagen.__version__.verify(setup_args['version'])
 
     setup(**setup_args)

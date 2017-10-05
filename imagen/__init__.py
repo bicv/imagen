@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.join(cwd, '..', 'holoviews'))
 import param
 from param.version import Version
 
-__version__ = Version(release=(2,0,1), fpath=__file__,
+__version__ = Version(release=(2,1,0), fpath=__file__,
                       commit="$Format:%h$", reponame='imagen')
 
 
@@ -1428,7 +1428,7 @@ class PowerSpectrum(PatternGenerator):
         sample_rate = self.signal.sample_rate
 
         # A signal window *must* span one sample rate
-        signal_window = np.tile(signal_interval, np.ceil(1.0/self.signal.interval_length))
+        signal_window = np.tile(signal_interval, int(np.ceil(1.0/self.signal.interval_length)))
 
         if self.windowing_function:
             smoothed_window = signal_window[0:sample_rate] * self.windowing_function(sample_rate)
